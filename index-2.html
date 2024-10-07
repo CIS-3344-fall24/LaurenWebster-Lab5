@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 5 - JavaScript</title>
+  </head>
+  <body>
+    <h1>Lab 5 - Working with Objects and Strings</h1>
+
+    <h2>Object Structure & Creating Objects - Tasks 1, 2, 3, 4</h2>
+    <script>
+      // Task 1: Create an object student
+      // Write your code here
+
+      const student ={
+        name: "Justin",
+        age: 22,
+        grade: "Senior",
+        introduce: function(){
+          console.log('Hi, I am ${this.name} and I am ${this.age} years old');
+        }
+
+      };
+      student.introduce();
+
+      // Task 2: Modify the student object
+      // Write your code here
+      student.major = "Cyber Security";
+      student.age = 25;
+      console.log(student);
+
+
+      // Task 3: Accessing properties and methods
+      // Write your code here
+
+      console.log('Name: ${student.name} , Grade: ${student.grade}');
+      student.introduce();
+
+      // Task 4: Nested Objects
+      // Write your code here
+      student.address = {
+        city: "Houston",
+        country: "USA"
+      };
+      console.log(student.address.city);
+    </script>
+
+    <h2>Working with Strings - Task 5</h2>
+    <script>
+      // Task 5: String Methods
+      // Write your code here
+      const message = " Hello, JavaScript! ";
+      console.log(message.toUpperCase());
+      console.log(message.toLowerCase());
+      console.log(message.concat("I am a student"));
+      console.log(message.trim());
+      console.log(message.trimStart());
+      console.log(message.trimEnd());
+      console.log(message.padStart(25, '-')); 
+      console.log(message.padEnd(25, '-'));  
+      console.log(message.repeat(2)); 
+      console.log(message.replace("Hello", "Hi"));
+      console.log(message.replaceAll(" ", "-"));
+      console.log(message.split(","));
+      console.log(message.indexOf("JavaScript"));
+      console.log(message.lastIndexOf(" "));
+      console.log(message.search("JavaScript"));
+      console.log(message.match(/JavaScript/));
+      console.log([...message.matchAll(/l/g)]);
+      console.log(message.includes("Java"));
+      console.log(message.startsWith(" Hello"));
+      console.log(message.endsWith("! "));  
+    </script>
+
+    <h2>If-Else Statements - Task 6</h2>
+    <script>
+      // Task 6: Write your if-else statement function here
+      function checkGrade(grade){
+        if (grade > 90){
+          console.log("Excellent");
+        } else if (grade >= 70){
+          console.log("Good");
+        } else {
+          console.log("Needs Improvement");
+        }
+      }
+      checkGrade(97);
+      checkGrade(54); 
+      checkGrade(81);
+    </script>
+
+    <h2>For Loops - Task 7</h2>
+    <script>
+      // Task 7: Write your createCounter function and processCounterCalls function here
+      function createCounter(init){
+        let count = init;
+        return{
+          increment(){
+            return ++count;
+          }, 
+          decrement(){
+            return --count;
+          },
+          reset(){
+            count = init;
+            return count;
+          }
+        };
+      }
+
+      function processCounterCalls(init, calls){
+        const counter = createCounter(init);
+        const results = [];
+
+        for (let call of calls){
+          results.push(counter[call]());
+        }
+        console.log(results);
+      }
+      processCounterCalls(5,["increment", "reset", "decrement"]);
+    </script>
+
+    <h2>Creating and Modifying Arrays - Tasks 8, 9, 10</h2>
+    <script>
+      // Task 8: Creating and accessing arrays
+      // Write your code here
+      const fruits = ["apple", "banana", "orange"];
+      console.log(fruits[0]);
+      console.log(fruits[fruits.length -1]);
+
+      // Task 9: Modifying arrays
+      // Write your code here
+      fruits.push("grape");  
+      fruits.shift();
+      console.log(fruits); 
+
+      // Task 10: Iterating over arrays
+      // Write your code here
+      for (let fruit of fruits) {
+        console.log(fruit);
+      }
+
+    </script>
+
+    <h2>Library System - Task 11</h2>
+    <script>
+      // Task 11: Book constructor and borrowBook function
+      // Write your code here
+      function Book(title, author, yearPublished, isAvailable){
+        this.title = title;
+        this.author = author;
+        this.yearPublished = yearPublished;
+        this.isAvailable = isAvailable;
+
+        this.getDetails = function(){
+          return `Title: ${this.title}, Author: ${this.author}, Year: ${this.yearPublished}, Available: ${this.isAvailable ? "Yes" : "No"}`;
+        };
+      }
+
+      const library = [
+        new Book("The Sorcerer's Stone", "J.K. Rowling", 1997, true),
+        new Book("The Chamber of Secrets", "J.K. Rowling", 1998, false),
+        new Book("The Order of the Phoenix", "J.K. Rowling", 2003, false)
+      ];
+
+      function borrowBook(title){
+        const book = library.find(b => b.title === title);
+        if (book){
+          if (book.isAvailable){
+            book.isAvailable = false;
+            console.log('You have successfully borrowed ${book.title}');
+          } else{
+            console.log('Sorry, ${book.title} is not available');
+          }
+        } else{
+          console.log(`The book titled ${title} was not found in the library.`);
+        }
+      }
+
+      borrowBook("The Order of the Phoenix");
+      borrowBook("The Chamber of Secrets");
+      borrowBook("The Sorcerer's Stone");
+
+    </script>
+  </body>
+</html>
